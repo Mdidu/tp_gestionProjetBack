@@ -38,7 +38,7 @@ public class ModuleServiceImpl implements ModuleService {
 
 	@Override
 	public Module findById(long id) {
-		return moduleRepository.getOne(id);
+		return moduleRepository.findById(id).get();
 	}
 
 }

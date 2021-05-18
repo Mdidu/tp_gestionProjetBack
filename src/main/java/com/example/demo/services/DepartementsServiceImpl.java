@@ -38,7 +38,7 @@ public class DepartementsServiceImpl implements DepartementsService {
 
 	@Override
 	public Departement findById(long id) {
-		return departementsRepository.getOne(id);
+		return departementsRepository.findById(id).get();
 	}
 
 }

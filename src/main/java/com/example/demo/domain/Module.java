@@ -3,6 +3,9 @@ package com.example.demo.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Date;
 import java.util.List;
 
@@ -29,11 +32,13 @@ public class Module implements Serializable {
 
 	//bi-directional many-to-one association to Projet
 	@ManyToOne
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name="IDPROJET")
 	private Projet projet;
 
 	//bi-directional many-to-one association to Tach
 	@OneToMany(mappedBy="module")
+	@JsonIgnore
 	private List<Tache> taches;
 
 	public Module() {

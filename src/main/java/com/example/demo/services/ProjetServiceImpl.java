@@ -38,7 +38,7 @@ public class ProjetServiceImpl implements ProjetService {
 
 	@Override
 	public Projet findById(long id) {
-		return projetRepository.getOne(id);
+		return projetRepository.findById(id).get();
 	}
 
 }

@@ -1,7 +1,14 @@
 package com.example.demo.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 /**
@@ -26,16 +33,19 @@ public class Employe implements Serializable {
 
 	//bi-directional many-to-one association to Departement
 	@ManyToOne
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name="IDDEPARTEMENT")
 	private Departement departement;
 
 	//bi-directional many-to-one association to Projet
 	@ManyToOne
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name="IDPROJET")
 	private Projet projet;
 
 	//bi-directional many-to-one association to Role
 	@ManyToOne
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name="IDROLE")
 	private Role role;
 		

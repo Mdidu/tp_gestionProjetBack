@@ -2,6 +2,9 @@ package com.example.demo.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -37,10 +40,12 @@ public class Projet implements Serializable {
 
 	//bi-directional many-to-one association to Employe
 	@OneToMany(mappedBy="projet")
+	@JsonIgnore
 	private List<Employe> employes;
 
 	//bi-directional many-to-one association to Module
 	@OneToMany(mappedBy="projet")
+	@JsonIgnore
 	private List<Module> modules;
 
 	public Projet() {

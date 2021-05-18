@@ -2,6 +2,9 @@ package com.example.demo.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -21,6 +24,7 @@ public class Departement implements Serializable {
 
 	//bi-directional many-to-one association to Employe
 	@OneToMany(mappedBy="departement")
+	@JsonIgnore
 	private List<Employe> employes;
 
 	public Departement() {

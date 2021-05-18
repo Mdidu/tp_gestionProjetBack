@@ -38,7 +38,7 @@ public class TacheServiceImpl implements TacheService {
 
 	@Override
 	public Tache findById(long id) {
-		return tacheRepository.getOne(id);
+		return tacheRepository.findById(id).get();
 	}
 
 }
