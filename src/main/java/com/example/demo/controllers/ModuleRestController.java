@@ -1,14 +1,18 @@
 package com.example.demo.controllers;
 
-import com.example.demo.domain.Module;
-import com.example.demo.services.ModuleService;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.domain.Module;
+import com.example.demo.services.ModuleService;
+
+@RestController
+@RequestMapping("/module")
 public class ModuleRestController {
 	@Autowired
 	ModuleService moduleService;
@@ -19,8 +23,8 @@ public class ModuleRestController {
 		listModules = moduleService.findAll();
 	}
 	
-	@RequestMapping("/read/")
-	public void readById(long id) {
+	@RequestMapping("/read/{id}")
+	public void readById(@PathVariable long id) {
 		Module module = new Module();
 		module = moduleService.findById(id);
 	}
@@ -35,8 +39,8 @@ public class ModuleRestController {
 		moduleService.update(module);
 	}
 
-	@RequestMapping("/delete")
-	public void delete(long id) {
+	@RequestMapping("/delete/{id}")
+	public void delete(@PathVariable long id) {
 		Module module = moduleService.findById(id);
 		moduleService.delete(module);
 	}

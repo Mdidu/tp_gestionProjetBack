@@ -42,7 +42,7 @@ public class Tache implements Serializable {
 		this.idtache = idtache;
 	}
 
-	public Object getDatedebut() {
+	public Date getDatedebut() {
 		return this.datedebut;
 	}
 
@@ -50,7 +50,7 @@ public class Tache implements Serializable {
 		this.datedebut = datedebut;
 	}
 
-	public Object getDatefinestimee() {
+	public Date getDatefinestimee() {
 		return this.datefinestimee;
 	}
 
@@ -58,7 +58,7 @@ public class Tache implements Serializable {
 		this.datefinestimee = datefinestimee;
 	}
 
-	public Object getDatefinreel() {
+	public Date getDatefinreel() {
 		return this.datefinreel;
 	}
 

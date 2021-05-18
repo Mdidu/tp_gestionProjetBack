@@ -47,7 +47,7 @@ public class Module implements Serializable {
 		this.idmodule = idmodule;
 	}
 
-	public Object getDatedebut() {
+	public Date getDatedebut() {
 		return this.datedebut;
 	}
 
@@ -55,7 +55,7 @@ public class Module implements Serializable {
 		this.datedebut = datedebut;
 	}
 
-	public Object getDatefinestimee() {
+	public Date getDatefinestimee() {
 		return this.datefinestimee;
 	}
 
@@ -63,7 +63,7 @@ public class Module implements Serializable {
 		this.datefinestimee = datefinestimee;
 	}
 
-	public Object getDatefinreel() {
+	public Date getDatefinreel() {
 		return this.datefinreel;
 	}
 

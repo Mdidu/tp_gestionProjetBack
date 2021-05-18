@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.Tache;
 import com.example.demo.services.TacheService;
 
+@RestController
+@RequestMapping("/tache")
 public class TacheRestController {
 	
 	@Autowired
@@ -20,8 +24,8 @@ public class TacheRestController {
 		listTaches = tacheService.findAll();
 	}
 	
-	@RequestMapping("/read/")
-	public void readById(long id) {
+	@RequestMapping("/read/{id}")
+	public void readById(@PathVariable long id) {
 		Tache tache = new Tache();
 		tache = tacheService.findById(id);
 	}
@@ -36,8 +40,8 @@ public class TacheRestController {
 		tacheService.update(tache);
 	}
 
-	@RequestMapping("/delete")
-	public void delete(long id) {
+	@RequestMapping("/delete/{id}")
+	public void delete(@PathVariable long id) {
 		Tache tache = tacheService.findById(id);
 		tacheService.delete(tache);
 	}

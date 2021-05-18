@@ -16,9 +16,7 @@ public class Employe implements Serializable {
 	@Id
 	private long idemploye;
 
-	private String column1;
-
-	private java.math.BigDecimal idrole;
+	private String prenom;
 
 	private String mail;
 
@@ -36,6 +34,11 @@ public class Employe implements Serializable {
 	@JoinColumn(name="IDPROJET")
 	private Projet projet;
 
+	//bi-directional many-to-one association to Role
+	@ManyToOne
+	@JoinColumn(name="IDROLE")
+	private Role role;
+		
 	public Employe() {
 	}
 
@@ -47,20 +50,12 @@ public class Employe implements Serializable {
 		this.idemploye = idemploye;
 	}
 
-	public String getColumn1() {
-		return this.column1;
+	public String getPrenom() {
+		return this.prenom;
 	}
 
-	public void setColumn1(String column1) {
-		this.column1 = column1;
-	}
-
-	public java.math.BigDecimal getIdrole() {
-		return this.idrole;
-	}
-
-	public void setIdrole(java.math.BigDecimal idrole) {
-		this.idrole = idrole;
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
 	}
 
 	public String getMail() {
@@ -101,6 +96,14 @@ public class Employe implements Serializable {
 
 	public void setProjet(Projet projet) {
 		this.projet = projet;
+	}
+
+	public Role getRole() {
+		return this.role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 }
