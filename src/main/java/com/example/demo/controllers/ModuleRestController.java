@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +19,7 @@ public class ModuleRestController {
 	ModuleService moduleService;
 	
 	@RequestMapping("/read")
-	public void read(/*long id*/) {
+	public void read() {
 		List<Module> listModules = new ArrayList<Module>();
 		listModules = moduleService.findAll();
 	}
@@ -30,12 +31,12 @@ public class ModuleRestController {
 	}
 
 	@RequestMapping("/add")
-	public void add(Module module) {
+	public void add(@RequestBody Module module) {
 		moduleService.add(module);
 	}
 
 	@RequestMapping("/update")
-	public void update(Module module) {
+	public void update(@RequestBody Module module) {
 		moduleService.update(module);
 	}
 

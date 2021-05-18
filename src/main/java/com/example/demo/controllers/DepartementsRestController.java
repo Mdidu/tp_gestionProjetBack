@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,12 +32,12 @@ public class DepartementsRestController {
 	}
 
 	@RequestMapping("/add")
-	public void add(Departement departement) {
+	public void add(@RequestBody Departement departement) {
 		departementsService.add(departement);
 	}
 
 	@RequestMapping("/update")
-	public void update(Departement departement) {
+	public void update(@RequestBody Departement departement) {
 		departementsService.update(departement);
 	}
 

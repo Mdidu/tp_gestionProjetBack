@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,12 +32,12 @@ public class RoleRestController {
 	}
 
 	@RequestMapping("/add")
-	public void add(Role role) {
+	public void add(@RequestBody Role role) {
 		roleService.add(role);
 	}
 
 	@RequestMapping("/update")
-	public void update(Role role) {
+	public void update(@RequestBody Role role) {
 		roleService.update(role);
 	}
 
