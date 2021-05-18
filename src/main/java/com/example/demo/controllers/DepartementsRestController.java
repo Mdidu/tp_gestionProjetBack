@@ -20,15 +20,17 @@ public class DepartementsRestController {
 	DepartementsService departementsService;
 	
 	@RequestMapping("/read")
-	public void read() {
+	public List<Departement> read() {
 		List<Departement> listDepartements = new ArrayList<Departement>();
 		listDepartements = departementsService.findAll();
+		return listDepartements;
 	}
 	
 	@RequestMapping("/read/{id}")
-	public void readById(@PathVariable long id) {
+	public Departement readById(@PathVariable long id) {
 		Departement departement = new Departement();
 		departement = departementsService.findById(id);
+		return departement;
 	}
 
 	@RequestMapping("/add")

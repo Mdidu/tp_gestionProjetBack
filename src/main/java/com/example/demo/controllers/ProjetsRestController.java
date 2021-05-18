@@ -20,15 +20,17 @@ public class ProjetsRestController {
 	ProjetService projetsService;
 	
 	@RequestMapping("/read")
-	public void read() {
+	public List<Projet> read() {
 		List<Projet> listProjets = new ArrayList<Projet>();
 		listProjets = projetsService.findAll();
+		return listProjets;
 	}
 	
 	@RequestMapping("/read/{id}")
-	public void readById(@PathVariable long id) {
+	public Projet readById(@PathVariable long id) {
 		Projet projet = new Projet();
 		projet = projetsService.findById(id);
+		return projet;
 	}
 
 	@RequestMapping("/add")

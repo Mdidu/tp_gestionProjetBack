@@ -20,15 +20,17 @@ public class EmployeRestController {
 	EmployeService employeService;
 	
 	@RequestMapping("/read")
-	public void read() {
+	public List<Employe> read() {
 		List<Employe> listEmployes = new ArrayList<Employe>();
 		listEmployes = employeService.findAll();
+		return listEmployes;
 	}
 	
 	@RequestMapping("/read/{id}")
-	public void readById(@PathVariable long id) {
+	public Employe readById(@PathVariable long id) {
 		Employe employe = new Employe();
 		employe = employeService.findById(id);
+		return employe;
 	}
 
 	@RequestMapping("/add")

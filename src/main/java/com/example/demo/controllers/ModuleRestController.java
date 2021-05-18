@@ -19,15 +19,17 @@ public class ModuleRestController {
 	ModuleService moduleService;
 	
 	@RequestMapping("/read")
-	public void read() {
+	public List<Module> read() {
 		List<Module> listModules = new ArrayList<Module>();
 		listModules = moduleService.findAll();
+		return listModules;
 	}
 	
 	@RequestMapping("/read/{id}")
-	public void readById(@PathVariable long id) {
+	public Module readById(@PathVariable long id) {
 		Module module = new Module();
 		module = moduleService.findById(id);
+		return module;
 	}
 
 	@RequestMapping("/add")

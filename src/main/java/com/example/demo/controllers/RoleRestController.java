@@ -20,15 +20,17 @@ public class RoleRestController {
 	RoleService roleService;
 
 	@RequestMapping("/read")
-	public void read() {
+	public List<Role> read() {
 		List<Role> listRoles = new ArrayList<Role>();
 		listRoles = roleService.findAll();
+		return listRoles;
 	}
 	
 	@RequestMapping("/read/{id}")
-	public void readById(@PathVariable long id) {
+	public Role readById(@PathVariable long id) {
 		Role role = new Role();
 		role = roleService.findById(id);
+		return role;
 	}
 
 	@RequestMapping("/add")

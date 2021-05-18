@@ -20,15 +20,17 @@ public class TacheRestController {
 	TacheService tacheService;
 	
 	@RequestMapping("/read")
-	public void read() {
+	public List<Tache> read() {
 		List<Tache> listTaches = new ArrayList<Tache>();
 		listTaches = tacheService.findAll();
+		return listTaches;
 	}
 	
 	@RequestMapping("/read/{id}")
-	public void readById(@PathVariable long id) {
+	public Tache readById(@PathVariable long id) {
 		Tache tache = new Tache();
 		tache = tacheService.findById(id);
+		return tache;
 	}
 
 	@RequestMapping("/add")
