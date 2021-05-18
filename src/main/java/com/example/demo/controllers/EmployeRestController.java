@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,31 +23,31 @@ public class EmployeRestController {
 	@Autowired
 	EmployeService employeService;
 	
-	@RequestMapping("/read")
+	@GetMapping("/read")
 	public List<Employe> read() {
 		List<Employe> listEmployes = new ArrayList<Employe>();
 		listEmployes = employeService.findAll();
 		return listEmployes;
 	}
 	
-	@RequestMapping("/read/{id}")
+	@GetMapping("/read/{id}")
 	public Employe readById(@PathVariable long id) {
 		Employe employe = new Employe();
 		employe = employeService.findById(id);
 		return employe;
 	}
 
-	@RequestMapping("/add")
+	@PostMapping("/add")
 	public void add(@RequestBody Employe employe) {
 		employeService.add(employe);
 	}
 
-	@RequestMapping("/update")
+	@PutMapping("/update")
 	public void update(@RequestBody Employe employe) {
 		employeService.update(employe);
 	}
 
-	@RequestMapping("/delete/{id}")
+	@DeleteMapping("/delete/{id}")
 	public void delete(@PathVariable long id) {
 		Employe employe = employeService.findById(id);
 		employeService.delete(employe);

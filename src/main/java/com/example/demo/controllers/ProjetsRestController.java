@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,31 +23,31 @@ public class ProjetsRestController {
 	@Autowired
 	ProjetService projetsService;
 	
-	@RequestMapping("/read")
+	@GetMapping("/read")
 	public List<Projet> read() {
 		List<Projet> listProjets = new ArrayList<Projet>();
 		listProjets = projetsService.findAll();
 		return listProjets;
 	}
 	
-	@RequestMapping("/read/{id}")
+	@GetMapping("/read/{id}")
 	public Projet readById(@PathVariable long id) {
 		Projet projet = new Projet();
 		projet = projetsService.findById(id);
 		return projet;
 	}
 
-	@RequestMapping("/add")
+	@PostMapping("/add")
 	public void add(@RequestBody Projet projets) {
 		projetsService.add(projets);
 	}
 
-	@RequestMapping("/update")
+	@PutMapping("/update")
 	public void update(@RequestBody Projet projets) {
 		projetsService.update(projets);
 	}
 
-	@RequestMapping("/delete/{id}")
+	@DeleteMapping("/delete/{id}")
 	public void delete(@PathVariable long id) {
 		Projet projets = projetsService.findById(id);
 		projetsService.delete(projets);
