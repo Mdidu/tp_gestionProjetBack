@@ -20,6 +20,9 @@ public class Projet implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "PROJET_SEQ")
+    @SequenceGenerator(name = "PROJET_SEQ", sequenceName = "PROJET_SEQ", allocationSize = 1)
+	@Column(name = "ID_PROJET", unique = true, nullable = false, precision = 22, scale = 0)
 	private long idprojet;
 
 	private String client;

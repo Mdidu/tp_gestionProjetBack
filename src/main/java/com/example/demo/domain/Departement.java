@@ -18,6 +18,9 @@ public class Departement implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "DEPARTEMENT_SEQ")
+    @SequenceGenerator(name = "DEPARTEMENT_SEQ", sequenceName = "DEPARTEMENT_SEQ", allocationSize = 1)
+	@Column(name = "ID_DEPARTEMENT", unique = true, nullable = false, precision = 22, scale = 0)
 	private long iddepartement;
 
 	private String libelle;

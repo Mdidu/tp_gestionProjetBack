@@ -3,10 +3,14 @@ package com.example.demo.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -22,6 +26,9 @@ public class Tache implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "TACHE_SEQ")
+    @SequenceGenerator(name = "TACHE_SEQ", sequenceName = "TACHE_SEQ", allocationSize = 1)
+	@Column(name = "ID_TACHE", unique = true, nullable = false, precision = 22, scale = 0)
 	private long idtache;
 
 	private Date datedebut;

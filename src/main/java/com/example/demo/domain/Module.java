@@ -20,6 +20,9 @@ public class Module implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "MODULE_SEQ")
+    @SequenceGenerator(name = "MODULE_SEQ", sequenceName = "MODULE_SEQ", allocationSize = 1)
+	@Column(name = "ID_MODULE", unique = true, nullable = false, precision = 22, scale = 0)
 	private long idmodule;
 
 	private Date datedebut;
