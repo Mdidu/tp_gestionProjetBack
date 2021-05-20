@@ -1,6 +1,5 @@
 package com.example.demo.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +26,12 @@ public class ProjetsRestController {
 	
 	@GetMapping("/read")
 	public List<Projet> read() {
-		List<Projet> listProjets = new ArrayList<Projet>();
-		listProjets = projetsService.findAll();
-		System.out.println(listProjets.get(0).getDatedebut());
-		return listProjets;
+		return projetsService.findAll();
 	}
 	
 	@GetMapping("/read/{id}")
 	public Projet readById(@PathVariable long id) {
-		Projet projet = new Projet();
-		projet = projetsService.findById(id);
-		return projet;
+		return projetsService.findById(id);
 	}
 
 	@PostMapping("/add")

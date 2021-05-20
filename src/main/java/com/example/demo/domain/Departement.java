@@ -71,4 +71,9 @@ public class Departement implements Serializable {
 		return employe;
 	}
 
+	@Override
+	public String toString() {
+		return "Departement [iddepartement=" + iddepartement + ", libelle=" + libelle + ", employes=" + employes + "]";
+	}
+
 }

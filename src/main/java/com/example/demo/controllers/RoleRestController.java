@@ -1,6 +1,5 @@
 package com.example.demo.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +26,12 @@ public class RoleRestController {
 
 	@GetMapping("/read")
 	public List<Role> read() {
-		List<Role> listRoles = new ArrayList<Role>();
-		listRoles = roleService.findAll();
-		return listRoles;
+		return roleService.findAll();
 	}
 	
 	@GetMapping("/read/{id}")
 	public Role readById(@PathVariable long id) {
-		Role role = new Role();
-		role = roleService.findById(id);
-		return role;
+		return roleService.findById(id);
 	}
 
 	@PostMapping("/add")

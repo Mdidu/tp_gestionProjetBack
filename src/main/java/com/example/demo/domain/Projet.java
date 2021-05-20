@@ -170,4 +170,12 @@ public class Projet implements Serializable {
 		return module;
 	}
 
+	@Override
+	public String toString() {
+		return "Projet [idprojet=" + idprojet + ", client=" + client + ", code=" + code + ", titre=" + titre + ", type="
+				+ type + ", datedebut=" + datedebut + ", datefinestimee=" + datefinestimee + ", datefinreel="
+				+ datefinreel + ", description=" + description + ", employes=" + employes + ", modules=" + modules
+				+ "]";
+	}
+
 }

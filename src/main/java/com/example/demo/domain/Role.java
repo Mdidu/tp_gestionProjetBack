@@ -40,4 +40,9 @@ public class Role implements Serializable {
 		this.libelle = libelle;
 	}
 
+	@Override
+	public String toString() {
+		return "Role [idrole=" + idrole + ", libelle=" + libelle + "]";
+	}
+
 }

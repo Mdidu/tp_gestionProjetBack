@@ -123,4 +123,10 @@ public class Employe implements Serializable {
 		this.role = role;
 	}
 
+	@Override
+	public String toString() {
+		return "Employe [idemploye=" + idemploye + ", prenom=" + prenom + ", mail=" + mail + ", nom=" + nom + ", pwd="
+				+ pwd + ", departement=" + departement + ", projet=" + projet + ", role=" + role + "]";
+	}
+
 }

@@ -1,6 +1,5 @@
 package com.example.demo.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +26,12 @@ public class TacheRestController {
 	
 	@GetMapping("/read")
 	public List<Tache> read() {
-		List<Tache> listTaches = new ArrayList<Tache>();
-		listTaches = tacheService.findAll();
-		return listTaches;
+		return tacheService.findAll();
 	}
 	
 	@GetMapping("/read/{id}")
 	public Tache readById(@PathVariable long id) {
-		Tache tache = new Tache();
-		tache = tacheService.findById(id);
-		return tache;
+		return tacheService.findById(id);
 	}
 
 	@PostMapping("/add")
