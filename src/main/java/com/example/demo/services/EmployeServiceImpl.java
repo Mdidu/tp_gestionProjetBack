@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.domain.Employe;
+import com.example.demo.domain.Projet;
 import com.example.demo.repository.EmployeRepository;
 
 @Service
@@ -41,4 +42,10 @@ public class EmployeServiceImpl implements EmployeService {
 		return employeRepository.findById(id).get();
 	}
 
+	@Override
+	public List<Employe> findByProjet(Projet id) {
+		return employeRepository.findByProjet(id);
+	}
+
+	
 }

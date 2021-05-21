@@ -37,7 +37,7 @@ public class Module implements Serializable {
 	@ManyToOne
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name="IDPROJET")
-	private Projet projet;
+	private Projet projet = new Projet();
 
 	//bi-directional many-to-one association to Tach
 	@OneToMany(mappedBy="module")
@@ -45,6 +45,10 @@ public class Module implements Serializable {
 	private List<Tache> taches;
 
 	public Module() {
+	}
+
+	public Module(long id) {
+		this.idmodule = id;
 	}
 
 	public long getIdmodule() {

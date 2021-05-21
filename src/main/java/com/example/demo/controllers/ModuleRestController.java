@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.Module;
+import com.example.demo.domain.Projet;
 import com.example.demo.services.ModuleService;
 
 @RestController
@@ -31,6 +32,11 @@ public class ModuleRestController {
 	@GetMapping("/read/{id}")
 	public Module readById(@PathVariable long id) {
 		return moduleService.findById(id);
+	}
+	
+	@GetMapping("/projet/{id}")
+	public List<Module> readByProjetId(@PathVariable long id) {
+		return moduleService.findByProjet(new Projet(id));
 	}
 
 	@PostMapping("/add")

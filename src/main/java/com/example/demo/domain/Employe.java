@@ -48,7 +48,7 @@ public class Employe implements Serializable {
 	@ManyToOne
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name="IDPROJET")
-	private Projet projet;
+	private Projet projet = new Projet();
 
 	//bi-directional many-to-one association to Role
 	@ManyToOne

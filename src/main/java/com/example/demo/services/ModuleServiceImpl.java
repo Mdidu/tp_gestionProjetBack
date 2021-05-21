@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.domain.Module;
+import com.example.demo.domain.Projet;
 import com.example.demo.repository.ModuleRepository;
 
 @Service
@@ -39,6 +40,11 @@ public class ModuleServiceImpl implements ModuleService {
 	@Override
 	public Module findById(long id) {
 		return moduleRepository.findById(id).get();
+	}
+
+	@Override
+	public List<Module> findByProjet(Projet id) {
+		return moduleRepository.findByProjet(id);
 	}
 
 }

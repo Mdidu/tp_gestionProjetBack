@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.Employe;
+import com.example.demo.domain.Projet;
 import com.example.demo.services.EmployeService;
 
 @RestController
@@ -32,6 +33,12 @@ public class EmployeRestController {
 	@GetMapping("/read/{id}")
 	public Employe readById(@PathVariable long id) {
 		return employeService.findById(id);
+	}
+	
+	@GetMapping("/projet/{id}")
+	public List<Employe> readByProjetId(@PathVariable long id) {
+		return employeService.findByProjet(new Projet(id));
+		
 	}
 
 	@PostMapping("/add")

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.domain.Module;
 import com.example.demo.domain.Tache;
 import com.example.demo.repository.TacheRepository;
 
@@ -39,6 +40,11 @@ public class TacheServiceImpl implements TacheService {
 	@Override
 	public Tache findById(long id) {
 		return tacheRepository.findById(id).get();
+	}
+
+	@Override
+	public List<Tache> findByModule(Module module) {
+		return tacheRepository.findByModule(module);
 	}
 
 }

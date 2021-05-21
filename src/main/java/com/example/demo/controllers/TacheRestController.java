@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.domain.Module;
 import com.example.demo.domain.Tache;
 import com.example.demo.services.TacheService;
 
@@ -32,6 +33,11 @@ public class TacheRestController {
 	@GetMapping("/read/{id}")
 	public Tache readById(@PathVariable long id) {
 		return tacheService.findById(id);
+	}
+	
+	@GetMapping("/read/{id}")
+	public List<Tache> readByModuleId(@PathVariable long id) {
+		return tacheService.findByModule(new Module(id));
 	}
 
 	@PostMapping("/add")

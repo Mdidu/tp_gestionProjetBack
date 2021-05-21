@@ -54,6 +54,10 @@ public class Projet implements Serializable {
 	public Projet() {
 	}
 
+	public Projet(long id) {
+		this.idprojet = id;
+	}
+
 	public long getIdprojet() {
 		return this.idprojet;
 	}

@@ -43,7 +43,7 @@ public class Tache implements Serializable {
 	@ManyToOne
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name="IDMODULE")
-	private Module module;
+	private Module module = new Module();
 
 	public Tache() {
 	}
