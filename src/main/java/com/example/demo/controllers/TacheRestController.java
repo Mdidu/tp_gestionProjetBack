@@ -35,7 +35,7 @@ public class TacheRestController {
 		return tacheService.findById(id);
 	}
 	
-	@GetMapping("/read/{id}")
+	@GetMapping("/module/{id}")
 	public List<Tache> readByModuleId(@PathVariable long id) {
 		return tacheService.findByModule(new Module(id));
 	}
