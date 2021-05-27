@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,12 @@ public class ProjetServiceImpl implements ProjetService {
 	@Override
 	public Projet findById(long id) {
 		return projetRepository.findById(id).get();
+	}
+
+	@Override
+	public List<Projet> findByDatedebutAndDatefinestimee(Date dateDebut, Date dateFin) {
+		System.out.println("deb " + dateDebut + " " + " fin " + dateFin);
+		return projetRepository.findByDatedebutAndDatefinestimee(dateDebut, dateFin);
 	}
 
 }

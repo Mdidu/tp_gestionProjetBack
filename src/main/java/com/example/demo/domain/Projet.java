@@ -32,11 +32,13 @@ public class Projet implements Serializable {
 	private String titre;
 
 	private String type;
-
+	@Temporal(TemporalType.DATE)
 	private Date datedebut;
 
+	@Temporal(TemporalType.DATE)
+	
 	private Date datefinestimee;
-
+	@Temporal(TemporalType.DATE)
 	private Date datefinreel;
 
 	private String description;

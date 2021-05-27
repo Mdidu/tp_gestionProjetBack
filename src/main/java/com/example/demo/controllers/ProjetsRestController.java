@@ -1,5 +1,8 @@
 package com.example.demo.controllers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,15 @@ public class ProjetsRestController {
 	@GetMapping("/read/{id}")
 	public Projet readById(@PathVariable long id) {
 		return projetsService.findById(id);
+	}
+	
+	@GetMapping("/read/date/dateDebut/{dateDebut}/dateFin/{dateFin}")
+	public List<Projet> readByDate(@PathVariable String dateDebut, @PathVariable String dateFin) throws ParseException {
+
+		Date dDebut = new SimpleDateFormat("yyyy-MM-dd").parse(dateDebut);
+		Date dFin = new SimpleDateFormat("yyyy-MM-dd").parse(dateFin);
+
+		return projetsService.findByDatedebutAndDatefinestimee(dDebut, dFin);
 	}
 
 	@PostMapping("/add")
