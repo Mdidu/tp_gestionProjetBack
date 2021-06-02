@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.domain.Employe;
 import com.example.demo.domain.Projet;
 import com.example.demo.services.EmployeService;
+import com.example.demo.util.Encrypt;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -27,6 +28,7 @@ public class EmployeRestController {
 	
 	@GetMapping("/read")
 	public List<Employe> read() {
+		
 		return employeService.findAll();
 	}
 	
@@ -43,6 +45,7 @@ public class EmployeRestController {
 
 	@PostMapping("/add")
 	public void add(@RequestBody Employe employe) {
+		employe.setPwd(Encrypt.encoder().encode(employe.getPwd()));
 		employeService.add(employe);
 	}
 

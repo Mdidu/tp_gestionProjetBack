@@ -1,11 +1,13 @@
 package com.example.demo.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.domain.ERole;
 import com.example.demo.domain.Role;
 import com.example.demo.repository.RoleRepository;
 
@@ -39,6 +41,11 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public Role findById(long id) {
 		return roleRepository.findById(id).get();
+	}
+
+	@Override
+	public Optional<Role> findByLibelle(ERole name) {
+		return roleRepository.findByLibelle(name);
 	}
 
 }

@@ -47,5 +47,10 @@ public class EmployeServiceImpl implements EmployeService {
 		return employeRepository.findByProjet(id);
 	}
 
+	@Override
+	public Employe findByMail(String mail) {
+		return employeRepository.findByMail(mail);
+	}
+
 	
 }

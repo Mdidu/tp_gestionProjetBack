@@ -10,4 +10,5 @@ import com.example.demo.domain.Projet;
 public interface EmployeRepository extends JpaRepository<Employe, Long> {
 
 	List<Employe> findByProjet(Projet id);
+	Employe findByMail(String mail);
 }

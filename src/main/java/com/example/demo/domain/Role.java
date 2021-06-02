@@ -1,7 +1,16 @@
 package com.example.demo.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 
 /**
@@ -19,9 +28,14 @@ public class Role implements Serializable {
 	@Column(name = "ID_ROLE", unique = true, nullable = false, precision = 22, scale = 0)
 	private long idrole;
 
-	private String libelle;
+	@Enumerated(EnumType.STRING)
+	private ERole libelle;
 
 	public Role() {
+	}
+	
+	public Role(ERole libelle) {
+		this.libelle = libelle;
 	}
 
 	public long getIdrole() {
@@ -32,11 +46,11 @@ public class Role implements Serializable {
 		this.idrole = idrole;
 	}
 
-	public String getLibelle() {
+	public ERole getLibelle() {
 		return this.libelle;
 	}
 
-	public void setLibelle(String libelle) {
+	public void setLibelle(ERole libelle) {
 		this.libelle = libelle;
 	}
 

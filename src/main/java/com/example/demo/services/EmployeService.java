@@ -8,4 +8,5 @@ import com.example.demo.domain.Projet;
 public interface EmployeService extends GlobalService<Employe> {
 
 	List<Employe> findByProjet(Projet id);
+	Employe findByMail(String mail);
 }
