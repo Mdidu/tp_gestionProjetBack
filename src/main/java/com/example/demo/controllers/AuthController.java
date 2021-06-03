@@ -1,9 +1,6 @@
 package com.example.demo.controllers;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Collection;
 
 import javax.validation.Valid;
 
@@ -12,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,18 +18,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.domain.Departement;
 import com.example.demo.domain.ERole;
+import com.example.demo.domain.Employe;
+import com.example.demo.domain.Projet;
 import com.example.demo.domain.Role;
-import com.example.demo.domain.User;
 import com.example.demo.jwt.JwtUtils;
 import com.example.demo.payload.request.LoginRequest;
 import com.example.demo.payload.request.SignupRequest;
 import com.example.demo.payload.response.JwtResponse;
 import com.example.demo.payload.response.MessageResponse;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.repository.EmployeRepository;
+import com.example.demo.services.DepartementsService;
+import com.example.demo.services.ProjetService;
 import com.example.demo.services.RoleService;
 import com.example.demo.services.UserDetailsImpl;
-
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -41,10 +42,16 @@ public class AuthController {
 	AuthenticationManager authenticationManager;
 
 	@Autowired
-	UserRepository userRepository;
+	EmployeRepository userRepository;
 
 	@Autowired
 	RoleService roleService;
+	
+	@Autowired
+	DepartementsService departementService;
+	
+	@Autowired
+	ProjetService projetService;
 
 	@Autowired
 	PasswordEncoder encoder;
@@ -59,12 +66,12 @@ public class AuthController {
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-		String jwt = jwtUtils.generateJwtToken(authentication);
 		
-		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();		
-		List<String> roles = userDetails.getAuthorities().stream()
-				.map(item -> item.getAuthority())
-				.collect(Collectors.toList());
+		String jwt = jwtUtils.generateJwtToken(authentication);
+
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();	
+
+		Collection<? extends GrantedAuthority> roles = userDetails.getAuthorities();
 
 		return ResponseEntity.ok(new JwtResponse(jwt, 
 												 userDetails.getId(), 
@@ -75,56 +82,45 @@ public class AuthController {
 
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-			return ResponseEntity
-					.badRequest()
-					.body(new MessageResponse("Error: Username is already taken!"));
-		}
 
-		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+		if (userRepository.existsByMail(signUpRequest.getEmail())) {
 			return ResponseEntity
 					.badRequest()
 					.body(new MessageResponse("Error: Email is already in use!"));
 		}
 
 		// Create new user's account
-		User user = new User(signUpRequest.getUsername(), 
-							 signUpRequest.getEmail(),
+		Employe user = new Employe(signUpRequest.getEmail(),
+							signUpRequest.getNom(),
+							signUpRequest.getPrenom(),
 							 encoder.encode(signUpRequest.getPassword()));
 
-		Set<String> strRoles = signUpRequest.getRole();
-		Set<Role> roles = new HashSet<>();
+		long idRoles = signUpRequest.getRole();
+		Role roles = new Role();
 
-		if (strRoles == null) {
-			Role userRole = roleService.findByLibelle(ERole.ROLE_USER)
+		long idDepartements = signUpRequest.getDepartement();
+		Departement departement = departementService.findById(idDepartements);
+		
+		long idProjets = signUpRequest.getProjet();
+		Projet projet = projetService.findById(idProjets);
+		
+		if (idRoles == 2) {
+			roles = roleService.findByLibelle(ERole.ROLE_ADMIN)
 					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-			roles.add(userRole);
+		} else if(idRoles == 3) {
+			roles = roleService.findByLibelle(ERole.ROLE_MODERATOR)
+					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));			
 		} else {
-			strRoles.forEach(role -> {
-				switch (role) {
-				case "admin":
-					Role adminRole = roleService.findByLibelle(ERole.ROLE_ADMIN)
-							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-					roles.add(adminRole);
-
-					break;
-				case "mod":
-					Role modRole = roleService.findByLibelle(ERole.ROLE_MODERATOR)
-							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-					roles.add(modRole);
-
-					break;
-				default:
-					Role userRole = roleService.findByLibelle(ERole.ROLE_USER)
-							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-					roles.add(userRole);
-				}
-			});
+			roles = roleService.findByLibelle(ERole.ROLE_USER)
+					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 		}
 
-		user.setRoles(roles);
+		user.setRole(roles);
+		user.setDepartement(departement);
+		user.setProjet(projet);
 		userRepository.save(user);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+		
 	}
 }

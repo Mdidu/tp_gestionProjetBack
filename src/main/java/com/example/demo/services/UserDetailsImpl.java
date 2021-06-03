@@ -1,15 +1,14 @@
 package com.example.demo.services;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.example.demo.domain.User;
+import com.example.demo.domain.Employe;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class UserDetailsImpl implements UserDetails {
@@ -24,10 +23,10 @@ public class UserDetailsImpl implements UserDetails {
 	@JsonIgnore
 	private String password;
 
-	private Collection<? extends GrantedAuthority> authorities;
+	private GrantedAuthority authorities;
 
 	public UserDetailsImpl(Long id, String username, String email, String password,
-			Collection<? extends GrantedAuthority> authorities) {
+			GrantedAuthority authorities) {
 		this.id = id;
 		this.username = username;
 		this.email = email;
@@ -35,22 +34,23 @@ public class UserDetailsImpl implements UserDetails {
 		this.authorities = authorities;
 	}
 
-	public static UserDetailsImpl build(User user) {
-		List<GrantedAuthority> authorities = user.getRoles().stream()
-				.map(role -> new SimpleGrantedAuthority(role.getLibelle().name()))
-				.collect(Collectors.toList());
+	public static UserDetailsImpl build(Employe user) {
+		
+		GrantedAuthority authorities = new SimpleGrantedAuthority(user.getRole().getLibelle().name());
 
 		return new UserDetailsImpl(
-				user.getId(), 
-				user.getUsername(), 
-				user.getEmail(),
-				user.getPassword(), 
+				user.getIdemploye(), 
+				user.getNom(), 
+				user.getMail(),
+				user.getPwd(), 
 				authorities);
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return authorities;
+		Collection<GrantedAuthority> authority = new ArrayList<GrantedAuthority>();
+		authority.add(authorities);
+		return authority;
 	}
 
 	public Long getId() {

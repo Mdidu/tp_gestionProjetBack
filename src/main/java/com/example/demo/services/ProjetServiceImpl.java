@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,11 @@ public class ProjetServiceImpl implements ProjetService {
 	public List<Projet> findByDatedebutAndDatefinestimee(Date dateDebut, Date dateFin) {
 		System.out.println("deb " + dateDebut + " " + " fin " + dateFin);
 		return projetRepository.findByDatedebutAndDatefinestimee(dateDebut, dateFin);
+	}
+
+	@Override
+	public Optional<Projet> findByIdprojet(long id) {
+		return projetRepository.findByIdprojet(id);
 	}
 
 }

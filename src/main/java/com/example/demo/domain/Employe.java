@@ -59,6 +59,13 @@ public class Employe implements Serializable {
 	public Employe() {
 	}
 
+	public Employe(String mail, String nom, String prenom, String pwd) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.mail = mail;
+		this.pwd = pwd;
+	}
+
 	public long getIdemploye() {
 		return this.idemploye;
 	}

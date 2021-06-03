@@ -1,6 +1,8 @@
 package com.example.demo.payload.response;
 
-import java.util.List;
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
 
 public class JwtResponse {
 	private String token;
@@ -8,9 +10,10 @@ public class JwtResponse {
 	private Long id;
 	private String username;
 	private String email;
-	private List<String> roles;
+	private Collection<? extends GrantedAuthority> roles;
 
-	public JwtResponse(String accessToken, Long id, String username, String email, List<String> roles) {
+	public JwtResponse(String accessToken, Long id, String username, String email,
+			Collection<? extends GrantedAuthority> roles) {
 		this.token = accessToken;
 		this.id = id;
 		this.username = username;
@@ -58,7 +61,8 @@ public class JwtResponse {
 		this.username = username;
 	}
 
-	public List<String> getRoles() {
+	public Collection<? extends GrantedAuthority> getRoles() {
 		return roles;
 	}
+	
 }
