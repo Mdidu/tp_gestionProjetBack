@@ -20,7 +20,7 @@ public class SignupRequest {
     @NotBlank
     @Size(max = 50)
     @Email
-    private String email;
+    private String mail;
     
     private long role;
     
@@ -30,7 +30,7 @@ public class SignupRequest {
     
     @NotBlank
     @Size(min = 6, max = 40)
-    private String password;
+    private String pwd;
   
     public String getUsername() {
         return username;
@@ -55,24 +55,24 @@ public class SignupRequest {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-
-	public String getEmail() {
-        return email;
-    }
- 
-    public void setEmail(String email) {
-        this.email = email;
-    }
- 
-    public String getPassword() {
-        return password;
-    }
- 
-    public void setPassword(String password) {
-        this.password = password;
-    }
     
-    public long getRole() {
+    public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public String getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+	public long getRole() {
       return this.role;
     }
     
@@ -95,4 +95,12 @@ public class SignupRequest {
 	public void setProjet(long projet) {
 		this.projet = projet;
 	}
+
+	@Override
+	public String toString() {
+		return "SignupRequest [username=" + username + ", nom=" + nom + ", prenom=" + prenom + ", mail=" + mail
+				+ ", role=" + role + ", departement=" + departement + ", projet=" + projet + ", pwd=" + pwd + "]";
+	}
+
+	
 }

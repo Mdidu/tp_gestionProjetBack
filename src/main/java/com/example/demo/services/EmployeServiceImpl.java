@@ -20,6 +20,7 @@ public class EmployeServiceImpl implements EmployeService {
 	
 	@Override
 	public void add(Employe employe) {
+		System.out.println(employe.getPwd());
 		employeRepository.save(employe);
 	}
 
@@ -51,6 +52,11 @@ public class EmployeServiceImpl implements EmployeService {
 	@Override
 	public Optional<Employe> findByMail(String mail) {
 		return employeRepository.findByMail(mail);
+	}
+
+	@Override
+	public boolean existsByMail(String email) {
+		return employeRepository.existsByMail(email);
 	}
 
 	

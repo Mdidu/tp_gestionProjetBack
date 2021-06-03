@@ -10,4 +10,5 @@ public interface EmployeService extends GlobalService<Employe> {
 
 	List<Employe> findByProjet(Projet id);
 	Optional<Employe> findByMail(String mail);
+	boolean existsByMail(String email);
 }

@@ -30,9 +30,11 @@ import com.example.demo.payload.response.JwtResponse;
 import com.example.demo.payload.response.MessageResponse;
 import com.example.demo.repository.EmployeRepository;
 import com.example.demo.services.DepartementsService;
+import com.example.demo.services.EmployeService;
 import com.example.demo.services.ProjetService;
 import com.example.demo.services.RoleService;
 import com.example.demo.services.UserDetailsImpl;
+import com.example.demo.util.Encrypt;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -42,7 +44,7 @@ public class AuthController {
 	AuthenticationManager authenticationManager;
 
 	@Autowired
-	EmployeRepository userRepository;
+	EmployeService userRepository;
 
 	@Autowired
 	RoleService roleService;
@@ -83,17 +85,17 @@ public class AuthController {
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 
-		if (userRepository.existsByMail(signUpRequest.getEmail())) {
+		if (userRepository.existsByMail(signUpRequest.getMail())) {
 			return ResponseEntity
 					.badRequest()
 					.body(new MessageResponse("Error: Email is already in use!"));
 		}
 
 		// Create new user's account
-		Employe user = new Employe(signUpRequest.getEmail(),
+		Employe user = new Employe(signUpRequest.getMail(),
 							signUpRequest.getNom(),
 							signUpRequest.getPrenom(),
-							 encoder.encode(signUpRequest.getPassword()));
+							 Encrypt.encoder().encode(signUpRequest.getPwd()));
 
 		long idRoles = signUpRequest.getRole();
 		Role roles = new Role();
@@ -118,7 +120,7 @@ public class AuthController {
 		user.setRole(roles);
 		user.setDepartement(departement);
 		user.setProjet(projet);
-		userRepository.save(user);
+		userRepository.add(user);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 		

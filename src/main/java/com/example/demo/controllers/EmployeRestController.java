@@ -51,6 +51,8 @@ public class EmployeRestController {
 
 	@PutMapping("/update")
 	public void update(@RequestBody Employe employe) {
+		System.out.println("aaa");
+		System.out.println(employe.toString());
 		employeService.update(employe);
 	}
 
